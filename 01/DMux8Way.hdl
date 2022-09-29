@@ -17,4 +17,6 @@ CHIP DMux8Way {
 
     PARTS:
     // Put your code here:
+    Mux4Way16 (a=a, b=b, c=c, d=)
 }
+

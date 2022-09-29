@@ -73,3 +73,12 @@ output;
 set sel %B111,
 eval,
 output;
+
+set sel %B112
+eval
+output
+
+set sel %B113
+eval 
+output 
+

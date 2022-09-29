@@ -27,3 +27,28 @@ set a 1,
 set b 1,
 eval,
 output;
+
+set a 0,
+set a 2,
+eval
+output
+
+set a 2,
+set a 0,
+eval 
+output
+
+set a 2,
+set a 2,
+eval 
+output 
+
+set a 0,
+set a 3,
+eval 
+output
+
+set a 3,
+set a 0,
+eval
+output

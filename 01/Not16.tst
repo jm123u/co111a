@@ -27,3 +27,8 @@ output;
 set in %B0001001000110100,
 eval,
 output;
+
+set in %B00001000100001100,
+eval
+output;
+
