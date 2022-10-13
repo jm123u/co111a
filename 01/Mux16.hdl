@@ -15,6 +15,6 @@ CHIP Mux16 {
 
     PARTS:
     // Put your code here:
-    Mux(a=a[15], b=b[15], sel=15)
+    Not (in=sel, out=notsel);
     
 }
