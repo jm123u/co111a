@@ -43,27 +43,24 @@ CHIP ALU {
 
     PARTS:
    // Put you code here:
-   Mux16(a=x, b=false, sel=zx, out=x1);
-
-   Not16(in=x1, out=notx)；
-   Mux16(a=x1, b=notx , sel=nx, out=x2);
-
-   Mux16(a=y, b=false, sel=zy, out=y1);
-
-   Not16(in=y1, out=outy);
-   Not16(in=y1, b=noty, sel=ny, out=y2);
-
-   Add16(a=y2, b=x2, out=xaddy);
-   And16(a=y2, b=x2, out=xandy);
-   Mux16(a=xandy, b=xaddy, sel=f, out=out1);
-
-   Not16(in=out1, out=notout);
-   Mux16(a=out1, b=notout, sel=no, out=out, out[0..7]=outLow, out[8..15]=outhight, out[15]=outHighset);
-
-   Or8way(in=outLow, out=orLow);
-   Or8way(in=outHight, out=orHigh);
-   Or(a=orLow, b=orHigh, out=orAll);
-   Mux(a=true, b=false, sel=orAll, out=zr);
-
-   Mux(a=false, b=true, sel=outHighest, out=ng);
+    Not16(in = x, out = notx);  
+    Not16(in = y, out = noty);
+    And16(a = x, b = notx, out = c0); //全0
+    Not16(in = c0, out = notc0);      //全1
+    Mux4Way16(a = x, b = c0, c = notx, d = notc0, sel[0] = zx, sel[1] = nx, out = ox);
+    Mux4Way16(a = y, b = c0, c = noty, d = notc0, sel[0] = zy, sel[1] = ny, out = oy);
+    And16(a = ox, b = oy, out = oxandoy);
+    Add16(a = ox, b = oy, out = oxaddoy);
+    Mux16(a = oxandoy, b = oxaddoy, sel = f, out = o);
+    Not16(in = o, out = noto);
+    Mux16(a = o, b = noto, sel = no, out = ofinal);
+    And16(a = ofinal, b[0..15] = true, out[0..7] = o1, out[8..15] = o2);
+    And16(a = ofinal, b[0..15] = true, out[0..14] = oo, out[15] = o15);
+    Or8Way(in = o1, out = oo1);
+    Or8Way(in = o2, out = oo2);
+    Not(in = oo1, out = no1);
+    Not(in = oo2, out = no2);
+    And(a = no1, b = no2, out = zr);
+    And(a = o15, b = true, out = ng);
+    And16(a = ofinal, b[0..15] = true, out = out);
 }
