@@ -12,4 +12,37 @@
 // the screen should remain fully clear as long as no key is pressed.
 
 // Put your code here.
+@SCREEN
+D = A
+@N
+M = D
+@RESULT
+M = 0
 
+(LOOP)
+    @N
+    D = M
+    @R0
+    D=M-D
+    @STOP
+    D;
+
+    @RESULT
+    D=M
+    @R1
+    D=D+M
+    @RESULT
+    M=D
+    @N
+    M=M+1
+    @LOOP
+    0;
+(STOP)
+
+    @RESULT
+    D=M
+    @R2
+    M=D
+(END)
+    @END
+    0;
